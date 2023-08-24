@@ -16,20 +16,16 @@ use App\Http\Controllers\API\ProductController;
 |
 */
 
-Route::group([
-    'prefix' => 'auth'
-], function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('signup', [AuthController::class, 'signup']);
+Route::controller(AuthController::class)->prefix('auth')->group(function () {
+    Route::post('login', 'login');
+    Route::post('signup', 'signup');
 
-    Route::group([
-        'middleware' => 'auth:api'
-    ], function() {
-        Route::get('logout', [AuthController::class, 'logout']);
-        Route::get('user', [AuthController::class, 'user']);
+    Route::middleware('auth:api')->group(function() {
+        Route::get('logout', 'logout');
+        Route::get('user', 'user');
     });
 });
 
 Route::middleware('auth:api')->group( function () {
-    Route::resource('products', ProductController::class);
+    Route::apiResource('products', ProductController::class);
 });
