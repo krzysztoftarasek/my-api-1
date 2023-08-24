@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\User;
 
-class UserTest extends TestCase
+class AuthTest extends TestCase
 {
 
     use WithFaker;
