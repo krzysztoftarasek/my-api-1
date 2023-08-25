@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group([
-    'prefix' => 'page'
-], function () {
-    Route::get('test1', fn() => 'test1');
-    Route::get('test2', fn() => 'test2')->name('test2');
-});
-
-Route::get('profile', fn() => 'Profile')->name('profile');
+Route::resource("sites", SiteController::class);

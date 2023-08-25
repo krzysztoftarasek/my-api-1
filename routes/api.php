@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,12 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     });
 });
 
+Route::apiResource('sites', SiteController::class)->only([
+    'index', 'show'
+]);
+
 Route::middleware('auth:api')->group( function () {
-    Route::apiResource('products', ProductController::class);
+    Route::apiResource('sites', SiteController::class)->except([
+        'index', 'show'
+    ]);
 });
