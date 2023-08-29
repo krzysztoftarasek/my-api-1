@@ -21,7 +21,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>#</th>
                   <th>Domain</th>
                   <th>Access</th>
                   <th>Actions</th>
@@ -30,7 +30,7 @@
               <tbody>
               @foreach($sites as $item)
                 <tr>
-                  <td>{{ $item->id }}</td>
+                  <td>{{ ++$i }}</td>
                   <td><a href="{{ route('sites.show', $item->id) }}" title="View Site">{{ $item->domain }}</a></td>
                   <td>{{ $item->access }}</td>
 

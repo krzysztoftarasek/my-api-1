@@ -10,15 +10,19 @@ use Illuminate\View\View;
 
 class SiteController extends Controller
 {
+    private const PER_PAGE = 5;
+
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        $sites = Site::latest()->paginate(5);
+        $sites = Site::orderBy('domain')->paginate(static::PER_PAGE);
+
+        $page = max(request()->input('page', 1) - 1, 0);
 
         return view('sites.index',compact('sites'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', $page * static::PER_PAGE);
     }
 
     /**
